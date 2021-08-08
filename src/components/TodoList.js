@@ -1,17 +1,27 @@
 import React from 'react';
+import { connect, useSelector } from 'react-redux';
 import data from './data';
 import Todo from './Todo';
 
-const TodoList = () => {
+const TodoList = (data) => {
+    let todos = data?.data;
+    const ID = () => {
+        return '_' + Math.random().toString(36).substr(2, 9);
+    };
+    
     return (
-        <ul style={{margin:'0 auto', listStyle:'none', padding:'10px'}}>
-            {data.map((todo)=> {
+        <ul style={{listStyle:'none', padding:'0'}}>
+            {todos && todos.length && todos.map((todo)=> {
                 return (
-                    <Todo {...todo}/>
+                    <Todo key={todo.id} {...todo}/>
                 );
             })}
         </ul>
     );
 }
 
-export default TodoList;
+const mapStatetoProps = state => {
+    return {data: state?.todos};
+}
+
+export default connect(mapStatetoProps)(TodoList);
