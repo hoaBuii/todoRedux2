@@ -11,7 +11,7 @@ const TodoList = (data) => {
     
     return (
         <ul style={{listStyle:'none', padding:'0'}}>
-            {todos && todos.length && todos.map((todo)=> {
+            {(todos && todos.length!=0) && todos.map((todo)=> {
                 return (
                     <Todo key={todo.id} {...todo}/>
                 );
